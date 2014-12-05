@@ -3,78 +3,46 @@
     // Executed when DOM is loaded
     $(function () {
 
-        alert('huhih');
+        var right_answer;
 
         $('.tile[data-action="get-random"]').click( function() {
 
-            alert('ok');
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/random',
+                success: function (question) {
 
-            var question = {
-                    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ?',
-                    answers: [
-                        {
-                            name:'Ut enim ad minim veniam'
-                        },
-                        {
-                            name:'quis nostrud exercitation ullamco'
-                        },
-                        {
-                            name:'laboris nisi ut aliquip ex ea commodo consequat'
-                        }
-                    ]
-                },
-                $content = $('<div class="content" id="question-content"></div>');
+                    console.log(question);
 
-            $content.add('<div>' + question.question + '</div>');
+                    var $content = $('<div class="content" id="question-content"></div>');
 
-//            <div class="content" id="question-content">
-//
-//                <div>{{question}}</div>
-//
-//                <ul>
-//                {{#each answers}}
-//                    <li class="input-control radio">
-//                        <label>
-//                            <input type="radio" name="answer" />
-//                            <span class="check"></span>
-//                        {{name}}
-//                        </label>
-//                    </li>
-//                {{/each}}
-//                </ul>
-//
-//                <button class="info large" data-action="submit-answer">Submit</button>
-//
-//            </div>
+                    $content.append('<div>' + question.question + '</div>');
 
-//            var question = {
-//                    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ?',
-//                    answers: [
-//                        {
-//                            name:'Ut enim ad minim veniam'
-//                        },
-//                        {
-//                            name:'quis nostrud exercitation ullamco'
-//                        },
-//                        {
-//                            name:'laboris nisi ut aliquip ex ea commodo consequat'
-//                        }
-//                    ]
-//                },
-//                source = $('#question-template').html(),
-//                template = Handlebars.compile(source),
-//                html = template(question),
-//                $html = $(html);
+                    var $list = $('<ul></ul>');
 
-            $('#mainPage').html($content);
+                    $.each(question.answers, function(key, value) {
+                        $list.append('<li class="input-control radio"><label><input type="radio" name="answer" /><span class="check"></span>' + value + '</label></li>')
+
+                    });
+
+                    $content.append($list);
+                    $content.append('<button class="info large" data-action="submit-answer">Submit</button>');
+
+                    $('#mainPage').html($content);
+
+                    right_answer = question.right_answer;
+
+                }
+            });
 
         });
 
-        $('button[data-action="submit-answer"]').click( function() {
-
-
-
-        })
+//        $('button[data-action="submit-answer"]').click( function() {
+//
+//            var answer = $('input[type="radio"]');
+//
+//        })
 
     });
 
