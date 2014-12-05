@@ -1,49 +1,97 @@
 (function ($) {
 
+    var right_answer,
+        name = window.prompt('Name :'),
+        player = new Player(name),
+        $home;
+
     // Executed when DOM is loaded
     $(function () {
 
-        var right_answer;
+        $('#topLeft').find('span.name').text(name);
 
         $('.tile[data-action="get-random"]').click( function() {
+            $home =  $('#mainPage').html();
 
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: '/random',
-                success: function (question) {
+            randomizeQuestion();
+        });
 
-                    console.log(question);
+        $('.tile[data-action="get-home"]').click( function() {
+            $('#mainPage').html($home);
+        });
 
-                    var $content = $('<div class="content" id="question-content"></div>');
+    });
 
-                    $content.append('<div>' + question.question + '</div>');
+    function addSubmitEvent() {
 
-                    var $list = $('<ul></ul>');
+        $('button[data-action="submit-answer"]').click( function() {
 
-                    $.each(question.answers, function(key, value) {
-                        $list.append('<li class="input-control radio"><label><input type="radio" name="answer" /><span class="check"></span>' + value + '</label></li>')
+            var answer = $('input:radio[name="answer"]:checked').parent().text();
 
-                    });
+            if (answer == right_answer) {
 
-                    $content.append($list);
-                    $content.append('<button class="info large" data-action="submit-answer">Submit</button>');
+                alert('You\'re right !');
 
-                    $('#mainPage').html($content);
+                player.addPoint();
+                $('#points').text(player.getScore());
 
-                    right_answer = question.right_answer;
+                var points = player.getScore();
 
+                if (points % 3 == 0 && points != 0) {
+                    player.addLevel();
+                    $('#level').text(player.getLevel());
                 }
-            });
+
+            }
+            else {
+                alert('You\'re wrong !');
+            }
+
+            randomizeQuestion();
 
         });
 
-//        $('button[data-action="submit-answer"]').click( function() {
-//
-//            var answer = $('input[type="radio"]');
-//
-//        })
+    }
 
-    });
+    function randomizeQuestion() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/random',
+            success: function (question) {
+
+                var $content = $('<div class="content" id="question-content"></div>');
+
+                $content.append('<div>' + question.question + '</div>');
+
+                var $list = $('<ul></ul>');
+
+                $.each(question.answers, function(key, value) {
+                    $list.append('<li class="input-control radio"><label><input type="radio" name="answer" /><span class="check"></span>' + value + '</label></li>')
+
+                });
+
+                $content.append($list);
+                $content.append('<button class="info large" data-action="submit-answer">Submit</button>');
+
+                $('#mainPage').html($content);
+
+                right_answer = question.right_answer;
+
+                addSubmitEvent();
+
+            }
+        });
+        //changePicture();
+    }
+
+    function changePicture() {
+
+        var number = Math.floor((Math.random() * 5) + 1);
+
+        console.log(number);
+        $('body').css('background-image', 'url("../images/' + number + '.jpg")');
+
+    }
 
 })(jQuery);

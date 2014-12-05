@@ -59,7 +59,6 @@ function Player(name){
     this.loosePoints = function(number){
         this.score -= number;
     };
-    this.score = score;
 /*
 * Achievements management
 */
@@ -69,7 +68,7 @@ function Player(name){
     };
     this.removeAchievement = function(achievement){
         for (var i = 0; i < this.achievements.length ;i++){
-            if(this.achievements[i].getName() == achievement.getName(){
+            if(this.achievements[i].getName() == achievement.getName() ){
                 this.achievements.splice(i,1);
                 this.score -= achievement.getPoints();
             }
@@ -89,3 +88,4 @@ function Player(name){
     this.print = function(){
         return this.name + " is level " + this.level + " with "+ this.score.getScore() + " points ";
     };
+}

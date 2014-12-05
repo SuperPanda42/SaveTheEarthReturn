@@ -23,9 +23,12 @@
 
         <div id="topLeft">
 
-            <div class="tile bg-grey" id="profile-tile">
+            <div class="tile bg-black" id="profile-tile">
                 <div class="tile-content icon">
                     <i class="icon-user-2"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name"></span>
                 </div>
             </div>
 
@@ -33,7 +36,12 @@
 
         <div id="bottomLeft">
 
-            <div class="tile bg-cyan">
+            <div class="leveling">
+                <div>Points : <span id="points">0</span></div>
+                <div>Level : <span id="level">1</span></div>
+            </div>
+
+            <div class="tile bg-cyan" data-action="get-home">
                 <div class="tile-content icon">
                     <i class="icon-home"></i>
                 </div>
