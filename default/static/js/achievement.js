@@ -27,6 +27,6 @@ function Achievement(name,points){
 * SortOf print
 */
     this.print = function(){
-        return this.name " awards " + this.points + " points";
+        return this.name + " awards " + this.points + " points";
     };
 }

@@ -82,15 +82,15 @@
 
             }
         });
-        //changePicture();
+        changePicture();
     }
 
     function changePicture() {
 
-        var number = Math.floor((Math.random() * 5) + 1);
+        var number = Math.floor((Math.random() * 4) + 1);
 
         console.log(number);
-        $('body').css('background-image', 'url("..//images/' + number + '.jpg")');
+        $('body').css('background-image', 'url("/static/images/' + number + '.jpg")');
 
     }
 
