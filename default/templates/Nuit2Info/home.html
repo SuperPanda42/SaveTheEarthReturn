@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    La Luna - Restaurant Pizzeria Snack - Cagnes/mer
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/home.css" %}" />
+{% endblock %}
+
+{% block content %}
+    <section>
+        <p class="pageTitle"><span class="important">Pourquoi choisir La Luna ?</span></p>
+    </section>
+
+    <section>
+        <p><span class="important">Les produits</span></p>
+        <p>Parce que manger doit rimer avec qualité, votre restaurant La Luna utilise des produits frais pour vos pizzas,
+           burgers, viandes, panini, salades, pâtes et sandwiches, et fait ses desserts maison.</p>
+    </section>
+
+    <section>
+        <p><span class="important">Le service</span></p>
+        <p>Parce que les pauses pour déjeuner sont courtes, La Luna se concentre sur une équipe professionnelle et
+        chaleureuse pour assurer un service RAPIDE et de qualité.</p>
+    </section>
+
+    <section>
+        <p><span class="important">Le restaurant</span></p>
+        <p>Parce qu'un restaurant doit être plus que la nourriture qu'il fournit,
+           La Luna offre un espace entièrement renové, une ambiance agréable et posée,
+           avec une Wifi gratuite à disposition et un grand écran.</p>
+    </section>
+
+    <section>
+        <p><span class="important">Le repas</span></p>
+        <p>Parce qu'on peut se faire plaisir tout en mangeant bien, La Luna propose des plats du jour,
+           permettant d'avoir des repas à la fois bons, équilibrés et variés tout au long de la semaine.</p>
+    </section>
+
+    <section>
+        <p><span class="important">Le choix</span></p>
+        <p>Parce que vous avez aussi votre mot à dire, La Luna vous permet de créer votre pizza comme vous l'aimez,
+           que ce soit en rajoutant des suppléments, en changeant la taille de la pâte (gratuitement !),
+            ou en vous mettant dans la peau du pizzaiolo et vous laissant choisir tous les éléments de votre pizza !</p>
+    </section>
+
+    <section>
+        <p><span class="important">La clientèle</span></p>
+        <p>Parce que tout le monde est différent, La Luna s'adapte, avec des petits prix adaptés aux étudiants,
+           des livraisons limitées à Cagnes pour assurer la rapidité des commandes,
+           des paiements en carte bleue même chez vous, la fidélité récompensée par des offres alléchantes,
+           et des promotions ponctuelles pour se faire plaisir !</p>
+    </section>
+{% endblock %}
+
+{% block right %}
+    {% if user.is_staff %}
+    <section>
+        <p><a href="{% url 'Luna.views.administration' %}">Administration</a></p>
+    </section>
+    {% endif %}
+    
+    {% if not user.is_authenticated %}
+        <section id="codeco">
+            <p>
+                <a href="{% url 'Luna.views.connexion' %}">Se connecter</a>
+                <a href="{% url 'Luna.views.inscription' %}">S'inscrire</a>
+            </p>
+        </section>
+    {% else %}
+        <section id="codeco">
+            <p>
+                <a href="{% url 'Luna.views.deconnexion' %}">Se déconnecter</a>
+                <a href="{% url 'Luna.views.compte' %}">Mon compte</a>
+            </p>
+        </section>
+    {% endif %}
+
+    <section id="news">
+        <p><span class="important">News</span></p>
+
+        <ul>
+            {% for new in news %}
+                <li>{{ new.news }}</li>
+            {% endfor %}
+        </ul>
+
+    </section>
+
+    <section id="todaySpecial">
+        <p><span class="important">Formules</span></p>
+
+        <ul>
+            {% for formule in formules %}
+                <li>{{ formule.formule }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="Promotions">
+        <p><span class="important">Promotions</span></p>
+
+        {% for promo in promos %}
+            <p>{{ promo.promo }}</p>
+        {% endfor %}
+    </section>
+    
+    <section id="infos">
+        <p><span class="important">Des avis ?</span></p>
+        <p>N'oubliez pas que vous pouvez nous laisser vos commentaires, avis, et appréciations en cliquant <a href="{% url 'Luna.views.comments' %}">ICI</a></p>
+    </section>
+{% endblock %}
