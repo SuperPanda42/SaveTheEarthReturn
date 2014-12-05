@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import redirect
+from django.http import HttpResponse
 from datetime import date, datetime
 import time
 
@@ -23,10 +24,17 @@ def home(request):
 
 def deconnexion(request):
     logout(request)
-    return home(request)
+    return HttpResponse("OK")
 
 def connexion(request):
-    return "connexion"
+    if request.method == "POST":
+        mail = request.POST.cleaned_data["email"]
+        password = request.POST.cleaned_data["password"]
+        user = authenticate(username=mail, password=password)
+        if user:
+            login(request, user)
+            return HttpResponse("OK")
+    return HttpResponse("KO")
 
 def inscription(request):
     return "inscription"
