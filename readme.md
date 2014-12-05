@@ -25,3 +25,14 @@ More details can be found on the homepage of the website : http://4526c83d74.url
 
 NB : At the moment, we are experiencing some hostings problems and the links with the OpenData API may not work properly, causing random questions to not change.
 Anyway, the website works when launched in localhost.
+
+## Animation ##
+
+Four animations are implemented :
+
+- The first one is when you click on one of the two buttons, the icon's size grow and reduce.
+- The second occurs when a player answer a question. The size of the main area reduces and grows while the next question is loading.
+- When a question is answered, the background image is replaced by an other one chosen randomly.
+- The last one occurs when a player get the right answer for a question. The profile tile goes down and goes back up while the score (and possibly level) is updated.
+
+To perform these animations we mainly use jQuery and the animate method.
