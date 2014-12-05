@@ -90,7 +90,7 @@
         var number = Math.floor((Math.random() * 5) + 1);
 
         console.log(number);
-        $('body').css('background-image', 'url("../images/' + number + '.jpg")');
+        $('body').css('background-image', 'url("..//images/' + number + '.jpg")');
 
     }
 
