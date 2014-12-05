@@ -6,13 +6,88 @@
     <head>
         <meta charset="utf-8" />
         <title>WeForgotToChooseAName</title>
+        <link rel="stylesheet" href="{% static "bower_components/Metro-UI-CSS/css/metro-bootstrap.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}" />
         <!--[if lt IE 9]>
 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+        <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+        <script  src="{% static "js/master.js" %}"></script>
     </head>
 
-    <body>
-        <a href="{% url 'Nuit2Info.views.home' %}">home</a>
+    <body class="metro">
+
+    <div id="leftPanel">
+
+        <div id="topLeft">
+
+            <div class="tile bg-grey" id="profile-tile">
+                <div class="tile-content icon">
+                    <i class="icon-user-2"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="bottomLeft">
+
+            <div class="tile bg-cyan">
+                <div class="tile-content icon">
+                    <i class="icon-home"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name">Home</span>
+                </div>
+            </div>
+
+
+            <div class="tile bg-lightGreen" data-action="get-random">
+                <div class="tile-content icon">
+                    <i class="icon-help"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name">Random quizz</span>
+                </div>
+            </div>
+
+            <div class="tile bg-amber">
+                <div class="tile-content icon">
+                    <i class="icon-cog"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name">Create quizz</span>
+                </div>
+            </div>
+
+            <div class="tile bg-lightRed">
+                <div class="tile-content icon">
+                    <i class="icon-file"></i>
+                </div>
+                <div class="tile-status">
+                    <span class="name">Choose quizz</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="rightPanel">
+
+        <div id="dnD">
+            Dnd
+        </div>
+
+        <div id="mainPage">
+
+        </div>
+
+    </div>
+
+    <script id="home-template" type="text/x-handlebars-template">
+        <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+    </script>
+
     </body>
 </html>

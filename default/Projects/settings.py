@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Nuit2Info',
+    'templatetag_handlebars',
 )
 
 MIDDLEWARE_CLASSES = (
