@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from datetime import date, datetime
 import time
+import urllib2, urllib
 
 from Nuit2Info.models import *
 
@@ -22,29 +23,9 @@ from Nuit2Info.models import *
 def home(request):
     return render(request, 'base.html', locals())
 
-def deconnexion(request):
-    logout(request)
-    return HttpResponse("OK")
-
-def connexion(request):
-    if request.method == "POST":
-        mail = request.POST.cleaned_data["email"]
-        password = request.POST.cleaned_data["password"]
-        user = authenticate(username=mail, password=password)
-        if user:
-            login(request, user)
-            return HttpResponse("OK")
-    return HttpResponse("KO")
-
-def inscription(request):
-    return "inscription"
-
-###################################################################################################
-###################################################################################################
-                                # LOGGED USERS ONLY METHODS
-###################################################################################################
-###################################################################################################
-
-@login_required
-def compte(request):
-    return "account"
+def random(request):
+    url = 'http://54.154.27.229:9876/opendata/question'
+    req = urllib2.Request(url)
+    handler = urllib2.urlopen(req)
+    
+    return HttpResponse(handler.read())
